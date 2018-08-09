@@ -41,7 +41,14 @@ public class Conexao {
     }
 
     public static void setFechaConexao(Connection conexao) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(conexao != null) {
+            try {
+                conexao.close();
+            }
+            catch(SQLException erro){
+                System.out.println("Erro: " + erro.getMessage());
+            }
+        }
     }
 
 }
