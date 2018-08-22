@@ -7,10 +7,9 @@ package modelo;
 
 /**
  *
- * @author 1005440
+ * @author 5257
  */
 public class Cidade {
-
     private int cid_codigo;
     private String nome;
     private String est_sigla;
@@ -44,5 +43,5 @@ public class Cidade {
     public void setEst_sigla(String est_sigla) {
         this.est_sigla = est_sigla;
     }
-
+    
 }

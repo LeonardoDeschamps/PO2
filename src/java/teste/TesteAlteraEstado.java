@@ -6,15 +6,25 @@
 package teste;
 
 import controle.Conexao;
+import controle.EstadoDB;
 import java.sql.Connection;
+import modelo.Estado;
 
 /**
  *
  * @author 5257
  */
-public class TestaConexao {
+public class TesteAlteraEstado {    
     public static void main(String[] args) {
+        Estado estado = new Estado("BA", "Brasília");
         Connection conexao = Conexao.getConexao();
+        boolean alterou = EstadoDB.SetAlteraEstado(estado, conexao);
+        if(alterou){
+            System.out.println("Estado alterado!");
+        }
+        else{
+            System.out.println("Erro ao alterar estado!");
+        }
         Conexao.setFechaConexao(conexao);
-    }    
+    }
 }

@@ -9,12 +9,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 /**
  *
- * @author 1005440
+ * @author 5257
  */
 public class Conexao {
-
     private static String base = "financeiro";
     private static String servidor = "localhost";
     private static String porta = ":3306";
@@ -22,33 +22,30 @@ public class Conexao {
     private static String senha = "";
     private static String driver = "com.mysql.jdbc.Driver";
     private static String url = "jdbc:mysql://"+servidor+porta+"/"+base;
-
+    
     public static Connection getConexao(){
         Connection conexao = null;
-
-        try {
+        try{
             Class.forName(driver);
-            conexao = DriverManager.getConnection(url, usuario, senha);
+            conexao = DriverManager.getConnection(url, usuario, senha);            
         }
-        catch(ClassNotFoundException erro) {
-            System.out.println("Erro de Driver: " + erro.getMessage());
+        catch(ClassNotFoundException erro){
+            System.out.println("Erro de driver: " + erro.getMessage());
         }
-        catch(SQLException erro) {
-            System.out.println("Erro de Conexão: " + erro.getMessage());
-        }
-
+        catch(SQLException erro){
+            System.out.println("Erro de Conexão: " + erro.getMessage());   
+        }        
         return conexao;
     }
-
-    public static void setFechaConexao(Connection conexao) {
-        if(conexao != null) {
-            try {
+    
+    public static void setFechaConexao(Connection conexao){
+        try{
+            if(conexao != null){
                 conexao.close();
             }
-            catch(SQLException erro){
-                System.out.println("Erro: " + erro.getMessage());
-            }
+        }
+        catch(SQLException erro){
+            System.out.println("Erro fechar conexão: " + erro.getMessage());
         }
     }
-
 }

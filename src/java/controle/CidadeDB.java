@@ -11,24 +11,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import modelo.Estado;
+import modelo.Cidade;
 
 /**
  *
  * @author 5257
  */
-public class EstadoDB {
-    
-    public static ArrayList getEstados(Connection conexao){
+public class CidadeDB {
+    public static ArrayList getCidades(Connection conexao){
         ArrayList lista = new ArrayList();
         try{
             Statement st = conexao.createStatement();
-            ResultSet rs = st.executeQuery("select * from estado");
+            ResultSet rs = st.executeQuery("select * from cidade");
             while(rs.next()){
+                int codigo = rs.getInt("cid_codigo");
                 String sigla = rs.getString("est_sigla");
                 String nome = rs.getString("nome");
-                Estado estado = new Estado(sigla, nome);
-                lista.add(estado);
+                Cidade cidade = new Cidade(codigo, nome, sigla);
+                lista.add(cidade);
             }
         }
         catch(SQLException erro){
@@ -38,12 +38,13 @@ public class EstadoDB {
     }
     
     
-    public static boolean SetInsereEstado(Estado estado, Connection conexao){
+    public static boolean SetInsereCidade(Cidade cidade, Connection conexao){
         boolean inseriu = false;
         try{
-            PreparedStatement pst = conexao.prepareStatement("insert into estado (est_sigla,nome) values (?,?)");
-            pst.setString(1, estado.getEst_sigla());
-            pst.setString(2, estado.getNome());
+            PreparedStatement pst = conexao.prepareStatement("insert into cidade (cid_codigo, est_sigla,nome) values (?,?,?)");
+            pst.setInt(1, cidade.getCid_codigo());
+            pst.setString(2, cidade.getEst_sigla());
+            pst.setString(3, cidade.getNome());
             int valor = pst.executeUpdate();
             if(valor == 1){
                 inseriu = true;
@@ -55,12 +56,13 @@ public class EstadoDB {
         return inseriu;
     }
     
-    public static boolean SetAlteraEstado(Estado estado, Connection conexao){
+    public static boolean SetAlteraCidade(Cidade cidade, Connection conexao){
         boolean alterou = false;
         try{
-            PreparedStatement pst = conexao.prepareStatement("update estado set nome = ? where est_sigla = ?");
-            pst.setString(1, estado.getNome());
-            pst.setString(2, estado.getEst_sigla());
+            PreparedStatement pst = conexao.prepareStatement("update cidade set nome = ?, est_sigla = ? where cid_codigo = ?");
+            pst.setString(1, cidade.getNome());
+            pst.setString(2, cidade.getEst_sigla());
+            pst.setInt(3, cidade.getCid_codigo());
             int valor = pst.executeUpdate();
             if(valor == 1){
                 alterou = true;
@@ -72,11 +74,11 @@ public class EstadoDB {
         return alterou;
     }
     
-    public static boolean SetExcluiEstado(String sigla, Connection conexao){
+    public static boolean SetExcluiCidade(int codigo, Connection conexao){
         boolean excluiu = false;
         try{
-            PreparedStatement pst = conexao.prepareStatement("delete from estado where est_sigla = ?");
-            pst.setString(1, sigla);
+            PreparedStatement pst = conexao.prepareStatement("delete from cidade where cid_codigo = ?");
+            pst.setInt(1, codigo);
             int valor = pst.executeUpdate();
             if(valor == 1){
                 excluiu = true;
@@ -87,5 +89,4 @@ public class EstadoDB {
         }
         return excluiu;
     }
-    
 }

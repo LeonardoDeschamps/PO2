@@ -5,24 +5,27 @@
  */
 package teste;
 
+import controle.PessoaDB;
 import controle.Conexao;
-import controle.EstadoDB;
 import java.sql.Connection;
 import java.util.ArrayList;
-import modelo.Estado;
+import modelo.Pessoa;
 
 /**
  *
  * @author 5257
  */
-public class TestaEstado {
+public class TestaPessoa {
     public static void main(String[] args) {
         Connection conexao = Conexao.getConexao();
-        ArrayList lista = EstadoDB.getEstados(conexao);
+        ArrayList lista = PessoaDB.getPessoas(conexao);
         for(int i = 0; i < lista.size(); i++){
-            Estado estado = (Estado) lista.get(i);
-            System.out.println("Sigla: " + estado.getEst_sigla());
-            System.out.println("Nome: " + estado.getNome());
+            Pessoa pessoa = (Pessoa) lista.get(i);
+            System.out.println("Código: " + pessoa.getCid_codigo());            
+            System.out.println("Nome: " + pessoa.getNome());
+            System.out.println("Cidade: " + pessoa.getCid_codigo());
+            System.out.println("Idade: " + pessoa.getIdade());
+            System.out.println("E-mail: " + pessoa.getEmail());
             System.out.println("***********");
         }
         Conexao.setFechaConexao(conexao);

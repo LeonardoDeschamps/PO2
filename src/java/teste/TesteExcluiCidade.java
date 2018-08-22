@@ -6,15 +6,24 @@
 package teste;
 
 import controle.Conexao;
+import controle.CidadeDB;
 import java.sql.Connection;
 
 /**
  *
  * @author 5257
  */
-public class TestaConexao {
+public class TesteExcluiCidade {
     public static void main(String[] args) {
+        int codigo = 3;
         Connection conexao = Conexao.getConexao();
+        boolean excluiu = CidadeDB.SetExcluiCidade(codigo, conexao);
+        if(excluiu){
+            System.out.println("Cidade excluída!");
+        }
+        else{
+            System.out.println("Erro ao excluir cidade!");
+        }
         Conexao.setFechaConexao(conexao);
-    }    
+    }
 }

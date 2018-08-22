@@ -6,15 +6,25 @@
 package teste;
 
 import controle.Conexao;
+import controle.EstadoDB;
 import java.sql.Connection;
+import modelo.Estado;
 
 /**
  *
  * @author 5257
  */
-public class TestaConexao {
+public class TesteInsereEstado {
     public static void main(String[] args) {
+        Estado estado = new Estado("BA", "Bahia");
         Connection conexao = Conexao.getConexao();
+        boolean inseriu = EstadoDB.SetInsereEstado(estado, conexao);
+        if(inseriu){
+            System.out.println("Estado inserido!");
+        }
+        else{
+            System.out.println("Erro ao inserir estado!");
+        }             
         Conexao.setFechaConexao(conexao);
-    }    
+    }
 }

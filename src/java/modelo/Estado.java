@@ -7,18 +7,17 @@ package modelo;
 
 /**
  *
- * @author 1005440
+ * @author 5257
  */
 public class Estado {
-
     private String est_sigla;
     private String nome;
 
     public Estado(String est_sigla, String nome) {
         this.est_sigla = est_sigla;
         this.nome = nome;
-    }
-
+    }    
+    
     public String getEst_sigla() {
         return est_sigla;
     }
@@ -34,5 +33,7 @@ public class Estado {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+    
+    
 }

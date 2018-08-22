@@ -7,10 +7,9 @@ package modelo;
 
 /**
  *
- * @author 1005440
+ * @author 5257
  */
 public class Conta {
-
     private int cnt_numero;
     private String descricao;
     private String data;
@@ -84,5 +83,5 @@ public class Conta {
     public void setPes_codigo(int pes_codigo) {
         this.pes_codigo = pes_codigo;
     }
-
+    
 }

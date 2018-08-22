@@ -7,10 +7,9 @@ package modelo;
 
 /**
  *
- * @author 1005440
+ * @author 5257
  */
 public class Pessoa {
-
     private int pes_codigo;
     private String nome;
     private int idade;
@@ -64,5 +63,5 @@ public class Pessoa {
     public void setCid_codigo(int cid_codigo) {
         this.cid_codigo = cid_codigo;
     }
-
+    
 }
